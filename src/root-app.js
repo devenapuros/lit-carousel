@@ -1,7 +1,7 @@
 /* eslint-disable indent */
 import { LitElement, html, css } from "lit";
-import { CarouselContainer } from "./carousel-container";
-import { CarouselItem } from "./carousel-item";
+import { CarouselContainer } from "./components/carousel-container";
+import { CarouselItem } from "./components/carousel-item";
 
 const myAlbums = [
     {
@@ -29,6 +29,11 @@ const myAlbums = [
         name: "The 2nd Law",
         artist: "Muse",
         thumbnail: "the-2nd-law.jpg",
+    },
+    {
+        name: "Ghost Stories",
+        artist: "Coldplay",
+        thumbnail: "ghost-stories.jpg",
     },
 ];
 
@@ -62,6 +67,12 @@ export class RootApp extends LitElement {
             color: #666;
             font-size: 0.9rem;
         }
+
+        @media screen and (max-width: 450px) {
+            :host {
+                max-width: 93vw;
+            }
+        }
     `;
 
     constructor() {
@@ -73,9 +84,12 @@ export class RootApp extends LitElement {
     render() {
         return html` <header>
                 <h1>My favorite albums</h1>
-                <small>${this.albums.length} total albums</small>
+                <small>${this.albums.length} albums</small>
             </header>
-            <carousel-container>
+            <carousel-container
+                .currentSlide=${this.currentSlide}
+                .totalSlides=${this.albums.length - 1}
+            >
                 ${this.albums.map(
                     (album) =>
                         html`<carousel-item

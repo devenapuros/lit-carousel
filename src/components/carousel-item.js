@@ -16,7 +16,10 @@ export class CarouselItem extends LitElement {
     render() {
         return html`<li>
             <figure>
-                <img src=${`/albums/${this.thumbnail}`} alt="" />
+                <img
+                    src=${`/albums/${this.thumbnail}`}
+                    alt=${`${this.name} album thumbnail by ${this.artist}`}
+                />
                 <figcaption>
                     <span class="album-name">${this.name}</span>
                     <span class="divider">●</span>
@@ -54,6 +57,7 @@ export class CarouselItem extends LitElement {
             width: 100%;
             height: auto;
             aspect-ratio: 1/1;
+            background-color: #eee;
         }
 
         figcaption {
